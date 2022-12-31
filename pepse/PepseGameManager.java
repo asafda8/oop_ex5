@@ -1,16 +1,12 @@
-package pepse.util;
+package pepse;
 
 import danogl.GameManager;
-import danogl.GameObject;
 import danogl.collisions.Layer;
 import danogl.gui.ImageReader;
 import danogl.gui.SoundReader;
 import danogl.gui.UserInputListener;
 import danogl.gui.WindowController;
-import danogl.gui.rendering.OvalRenderable;
 import danogl.util.Vector2;
-
-import java.awt.*;
 
 public class PepseGameManager extends GameManager {
 
