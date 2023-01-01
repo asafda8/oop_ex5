@@ -1,12 +1,9 @@
 package pepse.world.trees;
 
-import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
-import danogl.gui.rendering.RectangleRenderable;
-import danogl.gui.rendering.Renderable;
+import danogl.collisions.Layer;
 import danogl.util.Vector2;
 import pepse.world.Block;
-import pepse.world.Terrain;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -14,14 +11,15 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class Tree{
+    private static final int LEAF_LAYER = -50;
+    private static final int NUMBER_OF_LEAVES_ROWS_PER_TREE = 4;
+    private static final int NUMBER_OF_LEAVES_COLS_PER_TREE = 4;
     private HashMap<Integer, Boolean> hashMap = new HashMap<>();
     private Function<Float,
             Float> function;
     private Random random = new Random();
     private GameObjectCollection gameObjects;
-    private static final Color STAMP_COLOR = new Color(100, 50, 20);
-    private static final RectangleRenderable STAMP_RENDERABLE = new RectangleRenderable(STAMP_COLOR);
-    private static final Color LEAF_COLOR = new Color(50, 200, 30);
+
     public Tree(GameObjectCollection gameObjects, Function<Float,
             Float> function) {
         this.function = function;
@@ -46,11 +44,22 @@ public class Tree{
         }
     }
     private void createSingleTree(int xCoord){
-        Float yCoord =
-                (float) Math.floor(this.function.apply((float) xCoord) / Block.SIZE) * Block.SIZE;
+        int yCoord =
+                (int) (Math.floor(this.function.apply((float) xCoord) / Block.SIZE) * Block.SIZE);
         int factor = random.nextInt(5, 8);
-        for(Float currentY = yCoord; currentY > yCoord - Block.SIZE * factor; currentY-=Block.SIZE ){
-            gameObjects.addGameObject(new Block(new Vector2(xCoord, currentY), STAMP_RENDERABLE));
+        gameObjects.addGameObject(new TreeStamp(new Vector2(xCoord, yCoord - factor * Block.SIZE), factor),
+                Layer.BACKGROUND);
+        generateLeavesForTree(xCoord, yCoord - factor * Block.SIZE);
+
+    }
+    private void generateLeavesForTree(int xCoordOfTree, int topOfTree){
+        for(int x = xCoordOfTree - NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / 2;
+            x <= xCoordOfTree + NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / 2; x+= Block.SIZE){
+            for(int y = topOfTree - NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / 2;
+                y <= topOfTree + NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / 2; y+= Block.SIZE){
+                gameObjects.addGameObject(new Leaf(new Vector2(x,y)), LEAF_LAYER);
+                gameObjects.layers().shouldLayersCollide(Tree.LEAF_LAYER, Layer.STATIC_OBJECTS, true);
+            }
         }
     }
 
