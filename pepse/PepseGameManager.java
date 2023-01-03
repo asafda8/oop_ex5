@@ -7,6 +7,10 @@ import danogl.gui.SoundReader;
 import danogl.gui.UserInputListener;
 import danogl.gui.WindowController;
 import danogl.util.Vector2;
+import pepse.world.Avatar;
+import pepse.world.Sky;
+import pepse.world.Terrain;
+import pepse.world.daynight.Night;
 
 public class PepseGameManager extends GameManager {
 
@@ -31,6 +35,12 @@ public class PepseGameManager extends GameManager {
 //        GameObject sun = new GameObject(Vector2.ONES.multY(200), new Vector2(50, 50), new OvalRenderable(Color.WHITE));
 //        gameObjects().addGameObject(sun, SUN_LAYER);
 //        SunHalo.create(gameObjects(), SUN_HALO_LAYER, sun, new Color(255, 255, 0, 20));
+
+       Terrain terrain = new Terrain(gameObjects(), TERRAIN_LAYER, windowDimensions, 0);
+       terrain.createInRange(-10, 1000);
+
+
+        Avatar.create(gameObjects(), Layer.DEFAULT, windowDimensions.mult(0.5f), imageReader, inputListener);
     }
 
     public static void main(String[] args) {

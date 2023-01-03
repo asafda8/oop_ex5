@@ -3,7 +3,7 @@ import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
 import danogl.gui.rendering.RectangleRenderable;
 import danogl.gui.rendering.Renderable;
-import danogl.Vector2;
+import danogl.util.Vector2;
 import pepse.util.ColorSupplier;
 import pepse.world.trees.Tree;
 import pepse.util.Noise;
