@@ -102,6 +102,7 @@ public class Avatar extends GameObject{
                 topLeftCorner, new Vector2(30, 50), standingImage, inputListener, gameObjects
         );
         avatar.physics().preventIntersectionsFromDirection(Vector2.ZERO);
+
         gameObjects.addGameObject(avatar, layer);
         return avatar;
     }

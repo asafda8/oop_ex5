@@ -33,6 +33,9 @@ public class Leaf extends GameObject {
         startCycle();
     }
     public void startCycle(){
+        new ScheduledTask(this,
+                timeRandomGenerator.nextFloat() + timeRandomGenerator.nextInt(5),
+                false, this::rockLeaf);
         this.setVelocity(Vector2.ZERO);
         this.renderer().setOpaqueness(1);
         this.setTopLeftCorner(this.initialPosition);
@@ -52,6 +55,30 @@ public class Leaf extends GameObject {
                 10, //transition fully over half a day
                 Transition.TransitionType.TRANSITION_BACK_AND_FORTH,
                 null);
+    }
+
+    private void rockLeaf() {
+        float angle = Math.max(Math.abs((float) timeRandomGenerator.nextGaussian() * 1.5f), 5f);
+        new Transition<Float>(
+                this,
+                this.renderer()::setRenderableAngle,
+                angle,
+                angle-5f,
+                Transition.CUBIC_INTERPOLATOR_FLOAT,
+                1,
+                Transition.TransitionType.TRANSITION_BACK_AND_FORTH,
+                null
+        );
+        new Transition<Vector2>(
+                this,
+                this::setDimensions,
+                this.getDimensions(),
+                this.getDimensions().multX(1.05f),
+                Transition.CUBIC_INTERPOLATOR_VECTOR,
+                .1f,
+                Transition.TransitionType.TRANSITION_BACK_AND_FORTH,
+                null
+        );
     }
     private void endCycle(){
         new ScheduledTask(this, Leaf.timeRandomGenerator.nextInt(WAITING_BOUND),
