@@ -12,14 +12,22 @@ import java.awt.*;
 import java.util.Random;
 
 public class Leaf extends GameObject {
+    private static final Float TRANSITION_FACTOR_FOR_DIMENSIONS = 1.05f;
+    private static final Float ANGLE_DIFFERENCE = 5f;
     private static final Float INITIAL_ROTATE_TRANSITION_VALUE = -5f;
     private static final Float FINAL_ROTATE_TRANSITION_VALUE = 5f;
+    private static final int BOUND_FOR_RANDOM_WAITING_TO_ADD = 5;
     private final static Vector2 FALLING_VELOCITY = new Vector2(0, 10);
     private final static int WAITING_BOUND = 100;
+    private static final int TRANSITION_TIME_FOR_ANGLE = 1;
+    private static final float TRANSITION_TIME_FOR_DIMENSIONS = .1f;
     private final static int FADEOUT_TIME = 10;
     private static final float NO_MASS = 0;
-
-    private static final Random timeRandomGenerator = new Random();
+    private static final int FULL_OPAQUENESS = 1;
+    private static final int TRANSITION_TIME_TO_FALL = 10;
+    private static final Float FACTOR_FOR_ANGLE_CALCULATION = 1.5f;
+    private static final Float MAXIMUM_ANGLE = 5f;
+    private static final Random randomGenerator = new Random();
     private static final Color LEAF_COLOR = new Color(50, 200, 30);
     private static final RectangleRenderable LEAF_RENDERABLE = new RectangleRenderable(LEAF_COLOR);
     private static final Vector2 LEAF_DIMS = new Vector2(Block.SIZE, Block.SIZE);
@@ -34,12 +42,13 @@ public class Leaf extends GameObject {
     }
     public void startCycle(){
         new ScheduledTask(this,
-                timeRandomGenerator.nextFloat() + timeRandomGenerator.nextInt(5),
+                randomGenerator.nextFloat() +
+                        randomGenerator.nextInt(BOUND_FOR_RANDOM_WAITING_TO_ADD),
                 false, this::rockLeaf);
         this.setVelocity(Vector2.ZERO);
-        this.renderer().setOpaqueness(1);
+        this.renderer().setOpaqueness(FULL_OPAQUENESS);
         this.setTopLeftCorner(this.initialPosition);
-        new ScheduledTask(this, Leaf.timeRandomGenerator.nextInt(WAITING_BOUND),
+        new ScheduledTask(this, Leaf.randomGenerator.nextInt(WAITING_BOUND),
                 false, this::setLeafToFall);
 
     }
@@ -52,20 +61,21 @@ public class Leaf extends GameObject {
                 INITIAL_ROTATE_TRANSITION_VALUE, //initial transition value
                 FINAL_ROTATE_TRANSITION_VALUE, //final transition value
                 Transition.LINEAR_INTERPOLATOR_FLOAT, //use a cubic interpolator
-                10, //transition fully over half a day
+                TRANSITION_TIME_TO_FALL, //transition fully over half a day
                 Transition.TransitionType.TRANSITION_BACK_AND_FORTH,
                 null);
     }
 
     private void rockLeaf() {
-        float angle = Math.max(Math.abs((float) timeRandomGenerator.nextGaussian() * 1.5f), 5f);
+        float angle = Math.max(Math.abs((float) randomGenerator.nextGaussian() *
+                FACTOR_FOR_ANGLE_CALCULATION), MAXIMUM_ANGLE);
         new Transition<Float>(
                 this,
                 this.renderer()::setRenderableAngle,
                 angle,
-                angle-5f,
+                angle-ANGLE_DIFFERENCE,
                 Transition.CUBIC_INTERPOLATOR_FLOAT,
-                1,
+                TRANSITION_TIME_FOR_ANGLE,
                 Transition.TransitionType.TRANSITION_BACK_AND_FORTH,
                 null
         );
@@ -73,15 +83,15 @@ public class Leaf extends GameObject {
                 this,
                 this::setDimensions,
                 this.getDimensions(),
-                this.getDimensions().multX(1.05f),
+                this.getDimensions().multX(TRANSITION_FACTOR_FOR_DIMENSIONS),
                 Transition.CUBIC_INTERPOLATOR_VECTOR,
-                .1f,
+                TRANSITION_TIME_FOR_DIMENSIONS,
                 Transition.TransitionType.TRANSITION_BACK_AND_FORTH,
                 null
         );
     }
     private void endCycle(){
-        new ScheduledTask(this, Leaf.timeRandomGenerator.nextInt(WAITING_BOUND),
+        new ScheduledTask(this, Leaf.randomGenerator.nextInt(WAITING_BOUND),
                 false, this::startCycle);
     }
     @Override
