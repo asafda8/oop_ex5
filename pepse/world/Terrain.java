@@ -18,9 +18,9 @@ public class Terrain {
     private static final float PERLIN_NOISE_MULTIPLICATION_FACTOR = 200;
     private static final float PERLIN_NOISE_DIVISION_FACTOR = 20;
     private static final int TERRAIN_DEPTH = 20;
+    private static final int INITIAL_VALUE_FOR_LOOP = 0;
     private static final float WINDOW_DIMENSION_FACTOR = 2 / 3f;
     private Tree tree;
-
     private static final Color BASE_GROUND_COLOR = new Color(212, 123, 74);
     private static double STARTING_X_FACTOR = 2/3.0;
     private GameObjectCollection gameObjects;
@@ -47,8 +47,9 @@ public class Terrain {
         int endXCoord = (int) Math.ceil(maxX / (double)Block.SIZE) * Block.SIZE;
         for(int xCoord = startXCoord; xCoord <= endXCoord; xCoord+=Block.SIZE){
             int yCoord = (int) Math.ceil(groundHeightAt(xCoord) / Block.SIZE) * Block.SIZE;
-            for(int i = 0; i < 20; i ++){
-                gameObjects.addGameObject(new Block(new Vector2(xCoord, yCoord),groundRenderable), groundLayer);
+            for(int i = INITIAL_VALUE_FOR_LOOP; i < TERRAIN_DEPTH; i ++){
+                gameObjects.addGameObject(new Block(new Vector2(xCoord, yCoord),groundRenderable),
+                        groundLayer);
                 yCoord += Block.SIZE;
             }
         }
