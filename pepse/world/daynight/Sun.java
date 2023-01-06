@@ -10,6 +10,9 @@ import danogl.util.Vector2;
 
 import java.awt.*;
 
+/**
+ * class representing a gameobject of the sun
+ */
 public class Sun extends GameObject {
     /**
      * Starting x coordinate for the sun

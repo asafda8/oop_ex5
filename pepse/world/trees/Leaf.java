@@ -11,6 +11,9 @@ import pepse.world.Block;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * class representing a gameobject of a leaf
+ */
 public class Leaf extends GameObject {
     /**
      * factor for getting the last value of dimensions
