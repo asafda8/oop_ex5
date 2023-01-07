@@ -20,7 +20,7 @@ public class PowerupRandomFactory {
                 powerup = new FasterPowerup(topLeftCorner, dimensions, imageReader, avatar, gameObjects);
                 break;
             case "enlarge":
-                powerup = new FasterPowerup(topLeftCorner, dimensions, imageReader, avatar, gameObjects);
+                powerup = new EnlargePowerup(topLeftCorner, dimensions, imageReader, avatar, gameObjects);
                 break;
             default:
                 powerup = null;

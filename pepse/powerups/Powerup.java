@@ -12,6 +12,7 @@ import pepse.world.Avatar;
 abstract public class Powerup extends GameObject {
     private static final int POWER_UP_TIME = 10;
     private GameObjectCollection gameObjects;
+    private Boolean collided = false;
     private Avatar avatar;
     /**
      * Construct a new GameObject instance.
@@ -38,10 +39,11 @@ abstract public class Powerup extends GameObject {
     @Override
     public void onCollisionEnter(GameObject other, Collision collision) {
         super.onCollisionEnter(other, collision);
-        if(shouldCollideWith(other)){
+        if(shouldCollideWith(other) && !collided){
             powerup();
             new ScheduledTask(this.avatar, POWER_UP_TIME, false, this::returnToRegular);
-            this.gameObjects.removeGameObject(this);
+            this.renderer().setOpaqueness(0);
+            collided = true;
         }
 
     }
