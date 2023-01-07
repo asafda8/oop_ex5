@@ -23,7 +23,7 @@ public class Terrain {
     private static final Random  random = new Random();
     private static final float PERLIN_NOISE_MULTIPLICATION_FACTOR = 200;
     private static final float PERLIN_NOISE_DIVISION_FACTOR = 20;
-    private static final int TERRAIN_DEPTH = 10;
+    private static final int TERRAIN_DEPTH = 20;
     private static final int INITIAL_VALUE_FOR_LOOP = 0;
     private static final float WINDOW_DIMENSION_FACTOR = 2 / 3f;
     private HashMap<Integer, LinkedList<GameObject>> objectsMap;
