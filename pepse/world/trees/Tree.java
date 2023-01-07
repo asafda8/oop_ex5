@@ -1,11 +1,14 @@
 package pepse.world.trees;
 
+import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
 import danogl.collisions.Layer;
 import danogl.util.Vector2;
+import pepse.util.Utils;
 import pepse.world.Block;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.function.Function;
 
@@ -33,6 +36,7 @@ public class Tree{
      * upper bound of blocks for tree stamp
      */
     private static final int UPPER_BOUND_FOR_NUMBER_OF_BLOCKS = 8;
+    private static final int TREE_STAMP_LAYER = -51;
     /**
      * layer of the trees in leaves
      */
@@ -49,11 +53,12 @@ public class Tree{
      * hash maps that maps between a number and whether we should put a
      * tree in this number or not
      */
-    private HashMap<Integer, Boolean> shouldPutTree = new HashMap<>();
+    private HashMap<Integer, TreeStatus> coordinateToStatus = new HashMap<>();
     /**
      * hash maps that maps between coordinate and tree size
      */
     private HashMap<Integer, Integer> treeSizeInCoordinate = new HashMap<>();
+    private HashMap<Integer, LinkedList<Leaf>> coordinateToLeaves = new HashMap<>();
     /**
      * function to get height in of ground in x coordinate
      */
@@ -89,16 +94,18 @@ public class Tree{
         int endXCoord = (int) Math.ceil(maxX / (double)Block.SIZE) * Block.SIZE;
         for(int xCoord = startXCoord; xCoord <= endXCoord; xCoord+=Block.SIZE){
                 Boolean shouldCreateTree;
-                if(shouldPutTree.containsKey(xCoord)){
-                    shouldCreateTree = shouldPutTree.get(xCoord);
+                if(!coordinateToStatus.containsKey(xCoord)){
+                    if (random.nextInt(BOUND_FOR_RANDOMIZING) ==
+                            VALUE_FOR_PUTTING_TREE){
+                        coordinateToStatus.put(xCoord, TreeStatus.notActive);
+                    }
+                    else{
+                        coordinateToStatus.put(xCoord, TreeStatus.doesntExist);
+                    }
                 }
-                else{
-                     shouldCreateTree = (random.nextInt(BOUND_FOR_RANDOMIZING) ==
-                             VALUE_FOR_PUTTING_TREE);
-                     shouldPutTree.put(xCoord, shouldCreateTree);
-                }
-                if (shouldCreateTree){
+                if (coordinateToStatus.get(xCoord) == TreeStatus.notActive){
                     createSingleTree(xCoord);
+                    coordinateToStatus.put(xCoord, TreeStatus.Active);
                 }
 
         }
@@ -117,7 +124,7 @@ public class Tree{
         }
         int factor = treeSizeInCoordinate.get(xCoord);
         gameObjects.addGameObject(new TreeStamp(new Vector2(xCoord, yCoord - factor * Block.SIZE),
-                        factor), Layer.BACKGROUND);
+                        factor), TREE_STAMP_LAYER);
         generateLeavesForTree(xCoord, yCoord - factor * Block.SIZE);
     }
 
@@ -127,15 +134,33 @@ public class Tree{
      * @param topOfTree: top coordinate for the tree
      */
     private void generateLeavesForTree(int xCoordOfTree, int topOfTree){
+        coordinateToLeaves.put(xCoordOfTree, new LinkedList<>());
+        System.out.println(treeSizeInCoordinate.size());
         for(int x = xCoordOfTree - NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / NUMBER_OF_SIDES;
             x <= xCoordOfTree + NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / NUMBER_OF_SIDES;
             x+= Block.SIZE){
             for(int y = topOfTree - NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / NUMBER_OF_SIDES;
                 y <= topOfTree + NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / NUMBER_OF_SIDES;
                 y+= Block.SIZE){
-                gameObjects.addGameObject(new Leaf(new Vector2(x,y)), LEAF_LAYER);
+                Leaf leaf = new Leaf(new Vector2(x,y));
+                gameObjects.addGameObject(leaf, LEAF_LAYER);
                 gameObjects.layers().shouldLayersCollide(Tree.LEAF_LAYER, Layer.STATIC_OBJECTS,
                         true);
+                coordinateToLeaves.get(xCoordOfTree).push(leaf);
+            }
+        }
+    }
+    public void removeInRange(float minX, float maxX){
+        if(minX >= maxX){
+            return;
+        }
+        for(GameObject object: gameObjects.objectsInLayer(TREE_STAMP_LAYER)){
+            if(minX <= object.getCenter().x() && maxX >= object.getCenter().x()){
+                gameObjects.removeGameObject(object, TREE_STAMP_LAYER);
+                coordinateToStatus.put((int)object.getTopLeftCorner().x(), TreeStatus.notActive);
+                for(Leaf leaf : coordinateToLeaves.get((int)object.getTopLeftCorner().x())){
+                    gameObjects.removeGameObject(leaf, LEAF_LAYER);
+                }
             }
         }
     }

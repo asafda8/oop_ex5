@@ -28,6 +28,7 @@ public class Avatar extends GameObject{
     private final AnimationRenderable walkingAnimation;
     private float energyLevel = MAX_ENERGY;
     private UserInputListener inputListener;
+    private float moveSpeed;
 
     public Avatar(Vector2 topLeftCorner, Vector2 dimensions, Renderable renderable,
                   UserInputListener inputListener, GameObjectCollection gameObjects) {
@@ -38,8 +39,11 @@ public class Avatar extends GameObject{
         gameObjects.addGameObject(energuLevelIndicator, Layer.UI);
 
         walkingAnimation = new AnimationRenderable(new Renderable[]{runningImage1, runningImage2}, 0.2);
+        moveSpeed = MOVE_SPEED;
     }
-
+    public void multMoveSpeed(float factor){
+        moveSpeed *= factor;
+    }
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
@@ -47,13 +51,13 @@ public class Avatar extends GameObject{
         Vector2 velocity = Vector2.ZERO;
         // run left
         if (this.inputListener.isKeyPressed(KeyEvent.VK_LEFT)) {
-            velocity = velocity.add(Vector2.LEFT.mult(MOVE_SPEED));
+            velocity = velocity.add(Vector2.LEFT.mult(moveSpeed));
             this.renderer().setRenderable(walkingAnimation);
             this.renderer().setIsFlippedHorizontally(true);
         }
         // run right
         if (this.inputListener.isKeyPressed(KeyEvent.VK_RIGHT)) {
-            velocity = velocity.add(Vector2.RIGHT.mult(MOVE_SPEED));
+            velocity = velocity.add(Vector2.RIGHT.mult(moveSpeed));
             this.renderer().setRenderable(walkingAnimation);
             this.renderer().setIsFlippedHorizontally(false);
         }
