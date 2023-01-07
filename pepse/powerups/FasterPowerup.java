@@ -6,8 +6,17 @@ import danogl.util.Vector2;
 import pepse.world.Avatar;
 
 public class FasterPowerup extends Powerup{
+    /**
+     * path to image of powerup
+     */
     private static final String ASSET_PATH = "assets//shoe.png";
+    /**
+     * how much to increase speed by
+     */
     private static final int INCREASE_SPEED_FACTOR = 3;
+    /**
+     * factor to multiply when bringing speed back to normal
+     */
     private static final float DECREASE_SPEED_FACTOR = 1/3.0f;
 
     /**
@@ -26,11 +35,17 @@ public class FasterPowerup extends Powerup{
         super(topLeftCorner, dimensions, imageReader, ASSET_PATH, avatar, gameObjects);
     }
 
+    /**
+     * makes the avatar faster
+     */
     @Override
     public void powerup() {
         this.getAvatar().multMoveSpeed(INCREASE_SPEED_FACTOR);
     }
 
+    /**
+     * brings avatar back to regular speed
+     */
     @Override
     public void returnToRegular() {
         this.getAvatar().multMoveSpeed(DECREASE_SPEED_FACTOR);
