@@ -58,6 +58,9 @@ public class Tree{
      * hash maps that maps between coordinate and tree size
      */
     private HashMap<Integer, Integer> treeSizeInCoordinate = new HashMap<>();
+    /**
+     * maps between coordinates and the leaves of the tree
+     */
     private HashMap<Integer, LinkedList<Leaf>> coordinateToLeaves = new HashMap<>();
     /**
      * function to get height in of ground in x coordinate
