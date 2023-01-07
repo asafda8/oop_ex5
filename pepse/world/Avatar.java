@@ -113,9 +113,9 @@ public class Avatar extends GameObject{
 
     private static void initImages(ImageReader imageReader) {
         String basePath = new File("").getAbsolutePath();
-        String standingImagePath = basePath.concat("\\assets\\standing.png");
-        String runningImagePath1 = basePath.concat("\\assets\\running1.png");
-        String runningImagePath2 = basePath.concat("\\assets\\running2.png");
+        String standingImagePath = basePath.concat("\\assets\\Avatar_Aang_standing.png");
+        String runningImagePath1 = basePath.concat("\\assets\\Avatar_Aang_running.png");
+        String runningImagePath2 = basePath.concat("\\assets\\Avatar_Aang_running.png");
 
         standingImage = imageReader.readImage(standingImagePath, true);
         runningImage1 = imageReader.readImage(runningImagePath1, true);
