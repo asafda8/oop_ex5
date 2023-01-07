@@ -89,7 +89,7 @@ public class PepseGameManager extends GameManager {
                 (int)(avatar.getCenter().x() + margin));
         lastXCoordinateOfAvatar = avatar.getCenter().x();
     }
-    public void createPowerupRandomly(){
+    private void createPowerupRandomly(){
         if(this.currentPowerup != null){
             gameObjects().removeGameObject(currentPowerup);
         }

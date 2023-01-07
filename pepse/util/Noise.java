@@ -1,8 +1,10 @@
 package pepse.util;
 
 public class Noise {
-
-         private static final int P_NUM = 512;
+ /**
+  * variables for perlin private usage
+   */
+private static final int P_NUM = 512;
  private static final int MIN_SIZE = 1;
  private static final int MIN_RANGE = 0;
  private static final int MAX_RANGE = 256;

@@ -135,7 +135,6 @@ public class Tree{
      */
     private void generateLeavesForTree(int xCoordOfTree, int topOfTree){
         coordinateToLeaves.put(xCoordOfTree, new LinkedList<>());
-        System.out.println(treeSizeInCoordinate.size());
         for(int x = xCoordOfTree - NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / NUMBER_OF_SIDES;
             x <= xCoordOfTree + NUMBER_OF_LEAVES_COLS_PER_TREE * Block.SIZE / NUMBER_OF_SIDES;
             x+= Block.SIZE){
