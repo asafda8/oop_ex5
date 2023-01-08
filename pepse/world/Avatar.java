@@ -199,7 +199,7 @@ public class Avatar extends GameObject{
      */
 
     public static Avatar create(GameObjectCollection gameObjects, int layer, Vector2 topLeftCorner,
-                                ImageReader imageReader, UserInputListener inputListener) {
+                                UserInputListener inputListener, ImageReader imageReader) {
         initImages(imageReader);
         
         Avatar avatar = new Avatar(

@@ -121,8 +121,9 @@ public class Tree{
         int yCoord =
                 (int) (Math.floor(this.function.apply((float) xCoord) / Block.SIZE) * Block.SIZE);
         if(!treeSizeInCoordinate.containsKey(xCoord)){
-            treeSizeInCoordinate.put(xCoord, random.nextInt(LOWER_BOUND_FOR_NUMBER_OF_BLOCKS,
-                    UPPER_BOUND_FOR_NUMBER_OF_BLOCKS));
+            treeSizeInCoordinate.put(xCoord, random.nextInt(
+                    UPPER_BOUND_FOR_NUMBER_OF_BLOCKS - LOWER_BOUND_FOR_NUMBER_OF_BLOCKS
+                    ) + LOWER_BOUND_FOR_NUMBER_OF_BLOCKS);
         }
         int factor = treeSizeInCoordinate.get(xCoord);
         gameObjects.addGameObject(new TreeStamp(new Vector2(xCoord, yCoord - factor * Block.SIZE),

@@ -42,7 +42,7 @@ public class Night {
     public static GameObject create(GameObjectCollection gameObjects,
                                     int layer,
                                     Vector2 windowDimensions,
-                                    Float cycleLength) {
+                                    float cycleLength) {
         GameObject night = new GameObject(
                 Vector2.ZERO,
                 windowDimensions,

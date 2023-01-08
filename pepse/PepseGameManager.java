@@ -146,8 +146,8 @@ public class PepseGameManager extends GameManager {
         terrain = new Terrain(gameObjects(), TERRAIN_LAYER, windowDimensions, SEED_OF_GAME);
         terrain.createInRange(STARTING_COORDINATE, (int)windowController.getWindowDimensions().x());
         this.imageReader = imageReader;
-        avatar = Avatar.create(gameObjects(), Layer.DEFAULT, windowDimensions.mult(0.5f), imageReader,
-                inputListener);
+        avatar = Avatar.create(gameObjects(), Layer.DEFAULT, windowDimensions.mult(0.5f), inputListener,
+                imageReader);
         lastXCoordinateOfAvatar = avatar.getCenter().x();
         setCamera(new Camera(avatar, Vector2.ZERO,
                 windowController.getWindowDimensions(),
@@ -197,7 +197,7 @@ public class PepseGameManager extends GameManager {
         }
         int lowerBound = (int)getCamera().getTopLeftCorner().x();
         int upperBound =(int)(lowerBound + getCamera().windowDimensions().x());
-        int nonDivideableCoordinate = RANDOM_FOR_POWERUPS.nextInt(lowerBound, upperBound);
+        int nonDivideableCoordinate = RANDOM_FOR_POWERUPS.nextInt(upperBound - lowerBound) + lowerBound;
         int finalCoordinate = (nonDivideableCoordinate / Block.SIZE) * Block.SIZE;
         Vector2 positionVector = new Vector2(finalCoordinate,
                 terrain.groundHeightAt(finalCoordinate) - Block.SIZE);
