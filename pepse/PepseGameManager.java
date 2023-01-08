@@ -22,6 +22,10 @@ import pepse.world.daynight.SunHalo;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * class representing the manager of
+ * pepse game
+ */
 public class PepseGameManager extends GameManager {
     /**
      * waiting time between spawning of new powerup
