@@ -30,7 +30,8 @@ public class Sky {
      * @param skyLayer: layer of sky
      * @return: sky object
      */
-    public static GameObject create(GameObjectCollection gameObjects, Vector2 windowDimensions, int skyLayer) {
+    public static GameObject create(GameObjectCollection gameObjects, Vector2 windowDimensions,
+                                    int skyLayer) {
 
         GameObject sky = new GameObject(
                 Vector2.ZERO,

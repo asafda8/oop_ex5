@@ -71,6 +71,9 @@ public class Avatar extends GameObject{
      * gravity speed
      */
     private static final float GRAVITY = 3000f;
+    /**
+     * time between running images
+     */
     private static final float TIME_BETWEEN_CLIPS = 0.2f;
     /**
      * renderable representing image when standing

@@ -5,6 +5,9 @@ import danogl.gui.ImageReader;
 import danogl.util.Vector2;
 import pepse.world.Avatar;
 
+/**
+ * power up that makes the avatar faster
+ */
 public class FasterPowerup extends Powerup{
     /**
      * path to image of powerup

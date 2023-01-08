@@ -151,6 +151,12 @@ public class Tree{
             }
         }
     }
+
+    /**
+     * removes trees in the the given range
+     * @param minX: minimum x of the range
+     * @param maxX: maximum x of the range
+     */
     public void removeInRange(float minX, float maxX){
         if(minX >= maxX){
             return;
