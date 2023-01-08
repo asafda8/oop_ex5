@@ -17,7 +17,7 @@ public class Sun extends GameObject {
     /**
      * Starting x coordinate for the sun
      */
-    private static final int STARTING_X_COORDINATE = 50;
+    private static final int STARTING_X_COORDINATE = -50;
     /**
      * starting y coordinate for the sun
      */
@@ -37,7 +37,7 @@ public class Sun extends GameObject {
     /**
      * First angle of movement at the start of the day
      */
-    private static final float FIRST_ANGLE = (float)Math.PI * 0.53f;
+    private static final float FIRST_ANGLE = (float)Math.PI * 0.55f;
     /**
      * last angle of movement at the end of the day
      */
@@ -45,7 +45,7 @@ public class Sun extends GameObject {
     /***
      * factor to multiply vector with for movement
      */
-    private static final float FACTOR_FOR_ANGLE = 0.45f;
+    private static final float FACTOR_FOR_ANGLE = 0.3f;
 
     /**
      * creates a sun and returns its' instance

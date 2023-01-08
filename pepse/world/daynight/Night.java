@@ -32,7 +32,7 @@ public class Night {
 
         new Transition<Float>(
                 night, night.renderer()::setOpaqueness,
-                NOON_OPACITY, MIDNIGHT_OPACITY,
+                MIDNIGHT_OPACITY,NOON_OPACITY ,
                 Transition.CUBIC_INTERPOLATOR_FLOAT, cycleLength/2,
                 Transition.TransitionType.TRANSITION_BACK_AND_FORTH, null
         );
