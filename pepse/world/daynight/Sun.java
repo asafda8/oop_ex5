@@ -25,7 +25,7 @@ public class Sun extends GameObject {
     /**
      * radius of the sun
      */
-    private static final int DIMENSION = 20;
+    private static final int DIMENSION = 50;
     /***
      * Vector for initial position of the sun
      */
