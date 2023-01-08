@@ -1,0 +1,31 @@
+asafda8
+pinkaso
+
+
+The way we made the world infinite is by creating the edges of the camera from one side
+and removing it from the other continuously, by keeping track of the last known x position of the avatar.
+We also kept track of the objects which are activated and by that we
+avoided creating duplicates of the same object.
+
+
+The way we chose to implement the trees is by creating two addition classes:
+TreeStamp and Leaf. The reason for this choice is for modularity - enables us
+To disassemble the rule of trees into smaller independent issues. By that we make
+the program easier to maintain, debug and future updates.
+
+
+An example for a dilema we had about design in this exercise is with the design of the powerups
+which is the a functionallity we implemented for the bonus. We eventually chose to implement this
+using inheritance, by implementing an abstract class Powerup that the other powerup classes inherit
+from. The reasons for this is that the different kinds of implemented powerups are a kind of a
+powerup. Also, this allowed us to implement a lot of shared functionallity inside the Powerup
+class, enabling the different powerup classes to implement only two mandatory functions, one
+that activates the powerup and another that disables it.
+Also, we chose to implement a factory that randomizes a kind of powerup for encapsulation and
+for modularity.
+
+
+What we implemented for the bonus was the powerups. Powerups are objects inside the game
+that have the ability to make the avatar differnet for a small amount of time. As we said
+earlier, we used inheritance inorder to implement this ability.
+Also, we changed the image of the avatar to be the image of the real Avatar, Aang.
