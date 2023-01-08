@@ -4,7 +4,6 @@ import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
 import danogl.collisions.Layer;
 import danogl.util.Vector2;
-import pepse.util.Utils;
 import pepse.world.Block;
 
 import java.util.HashMap;

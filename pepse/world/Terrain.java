@@ -6,7 +6,6 @@ import danogl.gui.rendering.RectangleRenderable;
 import danogl.gui.rendering.Renderable;
 import danogl.util.Vector2;
 import pepse.util.ColorSupplier;
-import pepse.util.Utils;
 import pepse.world.trees.Tree;
 import pepse.util.Noise;
 import java.awt.*;
@@ -136,7 +135,6 @@ public class Terrain {
      * @param maxX: maxmimum x to remove objects in
      */
     public void removeInRange(float minX, float maxX){
-//        Utils.removeInLayerAndRange(minX, maxX, groundLayer, gameObjects);
         for(var key : objectsMap.entrySet()){
             if(key.getKey() >= minX && key.getKey() <= maxX){
                 while(!key.getValue().isEmpty()){
