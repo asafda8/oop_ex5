@@ -84,14 +84,6 @@ public class Avatar extends GameObject{
      */
     private static ImageRenderable runningImage;
     /**
-     * indicator for energy level
-     */
-    private final GameObject energuLevelIndicator;
-    /**
-     * renderable for text
-     */
-    private final TextRenderable textRenderable;
-    /**
      * animation for walking
      */
     private final AnimationRenderable walkingAnimation;
@@ -124,9 +116,6 @@ public class Avatar extends GameObject{
                   UserInputListener inputListener, GameObjectCollection gameObjects) {
         super(topLeftCorner, dimensions, renderable);
         this.inputListener = inputListener;
-        this.textRenderable = new TextRenderable(String.valueOf(energyLevel));
-        this.energuLevelIndicator = new GameObject(Vector2.ZERO, ENERGY_INDICATOR_POSITION, textRenderable);
-        gameObjects.addGameObject(energuLevelIndicator, Layer.UI);
 
         walkingAnimation = new AnimationRenderable(new Renderable[]{runningImage, runningImage},
                 TIME_BETWEEN_CLIPS);
@@ -189,7 +178,6 @@ public class Avatar extends GameObject{
 
         transform().setAccelerationY(GRAVITY);
         this.transform().setVelocity(velocity);
-        textRenderable.setString(String.valueOf(energyLevel));
     }
 
     /**

@@ -1,4 +1,4 @@
-package pepse.util.world.daynight;
+package pepse.world.daynight;
 
 import danogl.GameObject;
 import danogl.collisions.GameObjectCollection;
@@ -48,7 +48,7 @@ public class Sun extends GameObject {
     private static final float FACTOR_FOR_ANGLE = 0.3f;
 
     /**
-     * creates a sun and returns its' instance
+     * creates a sun and returns its instance
      * @param gameObjects: objects of the game
      * @param layer: layer to put sun in
      * @param windowDimensions: dimensions of the window
@@ -72,7 +72,7 @@ public class Sun extends GameObject {
     }
 
     /**
-     * returns the sun to its' initial position
+     * returns the sun to its initial position
      */
     private void returnToInitial() {
         this.setCenter(STARTING_POSITION_VECTOR);

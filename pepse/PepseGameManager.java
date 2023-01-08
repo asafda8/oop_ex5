@@ -1,4 +1,4 @@
-package pepse.util;
+package pepse;
 
 import danogl.GameManager;
 import danogl.GameObject;
@@ -138,7 +138,7 @@ public class PepseGameManager extends GameManager {
 
         Sky.create(gameObjects(), windowDimensions, SKY_LAYER);
         Night.create(gameObjects(), NIGHT_LAYER, windowDimensions, DAY_CYCLE);
-        GameObject sun = pepse.util.world.daynight.Sun.create(gameObjects(), SUN_LAYER,
+        GameObject sun = pepse.world.daynight.Sun.create(gameObjects(), SUN_LAYER,
                 windowDimensions
                 ,DAY_CYCLE);
         gameObjects().addGameObject(sun, SUN_LAYER);
