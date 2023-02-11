@@ -12,7 +12,7 @@ public class FasterPowerup extends Powerup{
     /**
      * path to image of powerup
      */
-    private static final String ASSET_PATH = "assets//shoe.png";
+    private static final String ASSET_PATH = "assets\\shoe.png";
     /**
      * how much to increase speed by
      */

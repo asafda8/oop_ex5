@@ -40,17 +40,13 @@ public class Avatar extends GameObject{
      */
     private static final Vector2 DIMENSIONS_OF_AVATAR =  new Vector2(30, 50);
     /**
-     * empty string to get the absolute path
-     */
-    private static final String EMPTY_STRING_FOR_PATH = "";
-    /**
      * relative path of avatar when standing
      */
-    private static final String AVATAR_STANDING_PATH = "\\assets\\Avatar_Aang_standing.png";
+    private static final String AVATAR_STANDING_PATH = "assets\\Avatar_Aang_standing.png";
     /**
      * relative path of avatar when running
      */
-    private static final String AVATAR_RUNNING_PATH = "\\assets\\Avatar_Aang_running.png";
+    private static final String AVATAR_RUNNING_PATH = "assets\\Avatar_Aang_running.png";
     /**
      * regular moving speed of avatar
      */
@@ -216,12 +212,7 @@ public class Avatar extends GameObject{
      * @param imageReader: reader for images
      */
     private static void initImages(ImageReader imageReader) {
-        String basePath = new File(EMPTY_STRING_FOR_PATH).getAbsolutePath();
-        String standingImagePath = basePath.concat(AVATAR_STANDING_PATH);
-        String runningImagePath1 = basePath.concat(AVATAR_RUNNING_PATH);
-        String runningImagePath2 = basePath.concat(AVATAR_RUNNING_PATH);
-
-        standingImage = imageReader.readImage(standingImagePath, true);
-        runningImage = imageReader.readImage(runningImagePath1, true);
+        standingImage = imageReader.readImage(AVATAR_STANDING_PATH, true);
+        runningImage = imageReader.readImage(AVATAR_RUNNING_PATH, true);
     }
 }

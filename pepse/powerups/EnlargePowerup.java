@@ -13,7 +13,7 @@ public class EnlargePowerup extends Powerup{
     /**
      * path to image of the powerup
      */
-    private static final String ASSET_PATH = "assets//apple.png";
+    private static final String ASSET_PATH = "assets\\apple.png";
     /**
      * factor for avatar enlargement
      */
